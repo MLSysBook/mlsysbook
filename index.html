@@ -3,54 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Machine Learning Systems | Vijay Janapa Reddi | Harvard University</title>
-    <meta name="description" content="Open-access machine learning systems textbook and educational resources. Developed at Harvard University to train the next generation of AI engineers.">
-    <meta name="keywords" content="machine learning, systems, textbook, education, Harvard, TinyML, edge computing">
+    <title>Machine Learning Systems | AI-Native Education | Harvard</title>
+    <meta name="description" content="Next-generation AI systems education. Interactive, adaptive learning powered by machine learning intelligence.">
+    <meta name="keywords" content="machine learning, AI systems, neural networks, generative AI, education, Harvard">
     <meta name="author" content="Vijay Janapa Reddi">
-    
-    <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="Machine Learning Systems - Harvard University">
-    <meta property="og:description" content="Open-access textbook and resources for training AI engineers">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mlsysbook.github.io">
     
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #8b5cf6;
-            --accent: #06b6d4;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
+            /* AI-Inspired Color Palette */
+            --neural-primary: #00ff94;
+            --neural-secondary: #0094ff;
+            --neural-accent: #ff0080;
+            --quantum-purple: #8a2be2;
+            --matrix-green: #00ff41;
+            --cyber-blue: #00d4ff;
+            --plasma-pink: #ff006e;
             
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-300: #d1d5db;
-            --gray-400: #9ca3af;
-            --gray-500: #6b7280;
-            --gray-600: #4b5563;
-            --gray-700: #374151;
-            --gray-800: #1f2937;
-            --gray-900: #111827;
+            /* Dynamic Gradients */
+            --gradient-neural: linear-gradient(135deg, var(--neural-primary), var(--neural-secondary), var(--quantum-purple));
+            --gradient-cyber: linear-gradient(45deg, var(--cyber-blue), var(--plasma-pink));
+            --gradient-matrix: linear-gradient(180deg, var(--matrix-green), var(--neural-primary));
             
-            --text-primary: var(--gray-900);
-            --text-secondary: var(--gray-600);
-            --text-muted: var(--gray-500);
+            /* Surfaces */
+            --surface-glass: rgba(255, 255, 255, 0.05);
+            --surface-neural: rgba(0, 255, 148, 0.1);
+            --surface-dark: #0a0a0a;
+            --surface-mid: #1a1a1a;
+            --surface-light: #2a2a2a;
             
-            --surface: #ffffff;
-            --surface-elevated: #ffffff;
-            --background: var(--gray-50);
+            /* Text */
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --text-ai: var(--neural-primary);
             
-            --border: var(--gray-200);
-            --border-light: var(--gray-100);
-            
-            --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            /* Shadows & Effects */
+            --glow-neural: 0 0 20px rgba(0, 255, 148, 0.3);
+            --glow-cyber: 0 0 30px rgba(0, 212, 255, 0.4);
+            --shadow-deep: 0 20px 40px rgba(0, 0, 0, 0.5);
+            --shadow-ai: 0 8px 32px rgba(0, 255, 148, 0.2);
         }
 
         * {
@@ -60,70 +51,130 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--surface-dark);
             color: var(--text-primary);
-            background: var(--background);
+            overflow-x: hidden;
             font-feature-settings: "liga" 1, "kern" 1;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Utility Classes */
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        /* Neural Network Background */
+        .neural-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 148, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 148, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 0, 128, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: neuralPulse 10s ease-in-out infinite;
         }
 
-        .grid {
-            display: grid;
-            gap: 2rem;
+        @keyframes neuralPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
 
-        .flex {
-            display: flex;
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
 
-        .items-center { align-items: center; }
-        .justify-center { justify-content: center; }
-        .justify-between { justify-content: space-between; }
-        .flex-col { flex-direction: column; }
-        .gap-1 { gap: 0.25rem; }
-        .gap-2 { gap: 0.5rem; }
-        .gap-3 { gap: 0.75rem; }
-        .gap-4 { gap: 1rem; }
-        .gap-6 { gap: 1.5rem; }
-        .gap-8 { gap: 2rem; }
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--neural-primary);
+            border-radius: 50%;
+            animation: float 15s linear infinite;
+            opacity: 0.4;
+        }
 
-        .text-center { text-align: center; }
-        .text-left { text-align: left; }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100px) translateX(200px);
+                opacity: 0;
+            }
+        }
 
         /* Header */
         .header {
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.8);
+            width: 100%;
+            background: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid rgba(0, 255, 148, 0.2);
+            z-index: 1000;
         }
 
         .nav {
-            height: 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-neural);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .nav-menu {
@@ -136,168 +187,274 @@
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.2s;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-neural);
+            transition: width 0.3s ease;
         }
 
         .nav-link:hover {
-            color: var(--primary);
+            color: var(--neural-primary);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
         }
 
         .nav-cta {
-            background: var(--primary);
-            color: white;
+            background: var(--gradient-neural);
+            color: var(--surface-dark);
             padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
+            border-radius: 25px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.2s;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .nav-cta:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: var(--glow-neural);
         }
 
         /* Hero Section */
         .hero {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.5;
-        }
-
         .hero-content {
-            position: relative;
-            z-index: 1;
+            max-width: 1000px;
             text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
+            z-index: 10;
+            padding: 0 2rem;
         }
 
-        .hero-badge {
+        .ai-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.75rem;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 0.75rem 1.5rem;
-            border-radius: 2rem;
+            gap: 0.5rem;
+            background: var(--surface-neural);
+            border: 1px solid rgba(0, 255, 148, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.95rem;
-            font-weight: 500;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--neural-primary);
+            backdrop-filter: blur(10px);
+        }
+
+        .ai-indicator {
+            width: 8px;
+            height: 8px;
+            background: var(--neural-primary);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
+            font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
+            background: var(--gradient-neural);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
-            opacity: 0.9;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
             margin-bottom: 3rem;
-            max-width: 600px;
+            line-height: 1.6;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            font-weight: 400;
-            line-height: 1.5;
+        }
+
+        .author-neural {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            padding: 1rem 2rem;
+            background: var(--surface-glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--neural-primary);
+            position: relative;
+        }
+
+        .author-avatar::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            background: var(--gradient-neural);
+            z-index: -1;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .hero-actions {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
         }
 
-        /* Buttons */
+        /* AI-Enhanced Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             padding: 1rem 2rem;
-            border-radius: 0.75rem;
+            border-radius: 30px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.2s;
+            font-weight: 700;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
             border: none;
             cursor: pointer;
         }
 
-        .btn-primary {
-            background: white;
-            color: var(--primary);
-            box-shadow: var(--shadow-lg);
+        .btn-ai-primary {
+            background: var(--gradient-neural);
+            color: var(--surface-dark);
+            box-shadow: var(--shadow-ai);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
+        .btn-ai-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
         }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
+        .btn-ai-primary:hover::before {
+            left: 100%;
         }
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
+        .btn-ai-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--glow-neural);
+        }
+
+        .btn-neural {
+            background: var(--surface-glass);
+            color: var(--neural-primary);
+            border: 2px solid var(--neural-primary);
+            backdrop-filter: blur(20px);
+        }
+
+        .btn-neural:hover {
+            background: var(--surface-neural);
+            transform: translateY(-4px);
+            box-shadow: var(--glow-cyber);
         }
 
         /* Main Content */
         .main {
             padding: 4rem 0;
+            position: relative;
+            z-index: 10;
         }
 
-        /* Stats */
-        .stats {
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* AI Stats with Neural Network Animation */
+        .ai-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 6rem;
         }
 
-        .stat {
-            text-align: center;
+        .stat-card {
+            background: var(--surface-glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
             padding: 2rem;
-            background: var(--surface);
-            border-radius: 1.5rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
-            transition: all 0.3s;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
         }
 
-        .stat:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-neural);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neural-primary);
+            box-shadow: var(--glow-neural);
         }
 
         .stat-number {
             font-size: 3rem;
             font-weight: 900;
-            color: var(--primary);
+            background: var(--gradient-neural);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             display: block;
             line-height: 1;
         }
@@ -306,12 +463,11 @@
             color: var(--text-secondary);
             font-weight: 600;
             margin-top: 0.5rem;
-            font-size: 0.95rem;
         }
 
-        /* Sections */
+        /* Neural Resource Grid */
         .section {
-            margin-bottom: 6rem;
+            margin-bottom: 8rem;
         }
 
         .section-header {
@@ -320,107 +476,147 @@
         }
 
         .section-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 800;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
             margin-bottom: 1rem;
-            letter-spacing: -0.02em;
+            background: var(--gradient-cyber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .section-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Resources Grid */
-        .resources-grid {
+        .neural-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 2rem;
         }
 
-        .resource-card {
-            background: var(--surface);
-            border-radius: 1.5rem;
+        .neural-card {
+            background: var(--surface-glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
             padding: 2.5rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s;
+            backdrop-filter: blur(20px);
             position: relative;
             overflow: hidden;
+            transition: all 0.5s ease;
+            text-decoration: none;
+            color: inherit;
         }
 
-        .resource-card::before {
+        .neural-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
+            width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: var(--gradient-neural);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
         }
 
-        .resource-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
+        .neural-card:hover::before {
+            transform: scaleX(1);
         }
 
-        .resource-header {
+        .neural-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: var(--neural-primary);
+            box-shadow: var(--glow-neural);
+        }
+
+        .card-header {
             display: flex;
             align-items: center;
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
 
-        .resource-icon {
+        .card-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 1rem;
+            background: var(--gradient-neural);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.75rem;
-            flex-shrink: 0;
+            font-size: 1.8rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .resource-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0;
+        .card-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: spinGlow 3s linear infinite;
+        }
+
+        @keyframes spinGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 800;
             color: var(--text-primary);
+            margin: 0;
         }
 
-        .resource-description {
+        .card-description {
             color: var(--text-secondary);
-            margin-bottom: 2rem;
             line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
         }
 
-        .resource-link {
+        .card-link {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--primary);
-            font-weight: 600;
+            color: var(--neural-primary);
+            font-weight: 700;
             text-decoration: none;
-            font-size: 0.95rem;
+            transition: all 0.3s ease;
         }
 
-        .resource-link:hover {
-            color: var(--primary-dark);
+        .card-link:hover {
+            gap: 1rem;
+            color: var(--cyber-blue);
         }
 
-        /* Audience Section */
-        .audience {
-            background: var(--surface);
-            border-radius: 2rem;
+        /* AI Audience Section */
+        .ai-audience {
+            background: var(--surface-glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
             padding: 4rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-audience::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-cyber);
         }
 
         .audience-grid {
@@ -431,17 +627,34 @@
         }
 
         .audience-card {
-            background: var(--gray-50);
+            background: var(--surface-mid);
+            border: 1px solid rgba(0, 255, 148, 0.2);
+            border-radius: 20px;
             padding: 2rem;
-            border-radius: 1.5rem;
-            border-left: 4px solid var(--primary);
-            transition: all 0.3s;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audience-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 148, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .audience-card:hover::after {
+            left: 100%;
         }
 
         .audience-card:hover {
-            transform: translateX(8px);
-            background: white;
-            box-shadow: var(--shadow-md);
+            transform: translateY(-8px);
+            border-color: var(--neural-primary);
+            box-shadow: var(--glow-neural);
         }
 
         .audience-header {
@@ -452,30 +665,23 @@
         }
 
         .audience-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 10px var(--neural-primary));
         }
 
         .audience-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .audience-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--neural-primary);
         }
 
         /* Footer */
         .footer {
-            background: var(--gray-900);
-            color: white;
+            background: var(--surface-dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding: 4rem 0 2rem;
             margin-top: 6rem;
-        }
-
-        .footer-content {
-            text-align: center;
+            position: relative;
         }
 
         .footer-links {
@@ -487,36 +693,40 @@
         }
 
         .footer-link {
-            color: var(--gray-400);
+            color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .footer-link:hover {
-            color: white;
+            color: var(--neural-primary);
+            text-shadow: 0 0 10px var(--neural-primary);
         }
 
         .footer-bottom {
-            border-top: 1px solid var(--gray-800);
+            text-align: center;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 2rem;
-            color: var(--gray-500);
-            font-size: 0.95rem;
         }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
             }
 
             .nav-menu {
-                flex-direction: column;
                 gap: 1rem;
             }
 
             .hero {
-                padding: 4rem 0;
+                min-height: 80vh;
+                padding: 2rem 0;
             }
 
             .hero-actions {
@@ -524,23 +734,15 @@
                 align-items: center;
             }
 
-            .main {
-                padding: 3rem 0;
-            }
-
-            .section {
-                margin-bottom: 4rem;
-            }
-
-            .resources-grid {
+            .neural-grid {
                 grid-template-columns: 1fr;
             }
 
-            .stats {
+            .ai-stats {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .audience {
+            .ai-audience {
                 padding: 2rem;
             }
 
@@ -550,58 +752,70 @@
 
             .footer-links {
                 flex-direction: column;
+                align-items: center;
                 gap: 1rem;
             }
         }
 
         @media (max-width: 480px) {
-            .stats {
+            .ai-stats {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Neural Network Background -->
+    <div class="neural-bg"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
     <!-- Header -->
     <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <a href="#" class="logo">
-                    🧠 MLSystems
-                </a>
-                <div class="nav-menu">
-                    <a href="#resources" class="nav-link">Resources</a>
-                    <a href="#audience" class="nav-link">Audience</a>
-                    <a href="https://github.com/orgs/mlsysbook/discussions" class="nav-link">Community</a>
-                    <a href="https://mlsysbook.ai" class="nav-cta">Read Book</a>
-                </div>
-            </nav>
-        </div>
+        <nav class="nav">
+            <a href="#" class="logo">
+                <div class="logo-icon">🧠</div>
+                <span>AI.MLSystems</span>
+            </a>
+            <div class="nav-menu">
+                <a href="#resources" class="nav-link">Resources</a>
+                <a href="#audience" class="nav-link">Community</a>
+                <a href="https://github.com/orgs/mlsysbook/discussions" class="nav-link">Neural.Net</a>
+                <a href="https://mlsysbook.ai" class="nav-cta">Access Book</a>
+            </div>
+        </nav>
     </header>
 
     <!-- Hero -->
     <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <img src="https://github.com/profvjreddi.png" alt="Vijay Janapa Reddi" style="width: 24px; height: 24px; border-radius: 50%;">
-                    <span>Vijay Janapa Reddi • Harvard University</span>
+        <div class="hero-content">
+            <div class="ai-badge">
+                <div class="ai-indicator"></div>
+                <span>AI-Powered Learning • Vijay Reddi @ Harvard</span>
+            </div>
+            
+            <h1>Neural Learning<br>Systems</h1>
+            
+            <p class="hero-subtitle">
+                Next-generation AI education platform. Adaptive, intelligent, and designed for the future of machine learning systems engineering.
+            </p>
+            
+            <div class="author-neural">
+                <img src="https://github.com/profvjreddi.png" alt="Vijay Janapa Reddi" class="author-avatar">
+                <div>
+                    <div style="font-weight: 700; color: var(--neural-primary);">Vijay Janapa Reddi</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Harvard University</div>
                 </div>
-                
-                <h1>Machine Learning<br>Systems</h1>
-                
-                <p class="hero-subtitle">
-                    Train the next generation of AI engineers who think holistically across algorithms, data, hardware, and infrastructure
-                </p>
-                
-                <div class="hero-actions">
-                    <a href="https://mlsysbook.ai" class="btn btn-primary">
-                        📖 Read the Book
-                    </a>
-                    <a href="https://github.com/mlsysbook/labs" class="btn btn-secondary">
-                        🚀 Start Learning
-                    </a>
-                </div>
+            </div>
+            
+            <div class="hero-actions">
+                <a href="https://mlsysbook.ai" class="btn btn-ai-primary">
+                    🚀 Launch Learning
+                </a>
+                <a href="https://github.com/mlsysbook/labs" class="btn btn-neural">
+                    ⚡ Neural Labs
+                </a>
             </div>
         </div>
     </section>
@@ -609,138 +823,138 @@
     <!-- Main Content -->
     <main class="main">
         <div class="container">
-            <!-- Stats -->
-            <section class="stats">
-                <div class="stat">
+            <!-- AI Stats -->
+            <section class="ai-stats">
+                <div class="stat-card">
                     <span class="stat-number">15+</span>
-                    <span class="stat-label">Chapters</span>
+                    <span class="stat-label">Neural Chapters</span>
                 </div>
-                <div class="stat">
+                <div class="stat-card">
                     <span class="stat-number">50+</span>
-                    <span class="stat-label">Lab Exercises</span>
+                    <span class="stat-label">AI Experiments</span>
                 </div>
-                <div class="stat">
-                    <span class="stat-number">Open</span>
-                    <span class="stat-label">Access</span>
+                <div class="stat-card">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Open Access</span>
                 </div>
-                <div class="stat">
-                    <span class="stat-number">1000+</span>
-                    <span class="stat-label">Students</span>
+                <div class="stat-card">
+                    <span class="stat-number">1K+</span>
+                    <span class="stat-label">AI Engineers</span>
                 </div>
             </section>
 
-            <!-- Resources -->
+            <!-- Neural Resources -->
             <section class="section" id="resources">
                 <div class="section-header">
-                    <h2 class="section-title">Learning Resources</h2>
-                    <p class="section-subtitle">Everything you need to master machine learning systems</p>
+                    <h2 class="section-title">AI Learning Matrix</h2>
+                    <p class="section-subtitle">Adaptive intelligence for mastering machine learning systems</p>
                 </div>
 
-                <div class="resources-grid">
-                    <a href="https://mlsysbook.ai" class="resource-card">
-                        <div class="resource-header">
-                            <div class="resource-icon">📚</div>
-                            <h3 class="resource-title">The Textbook</h3>
+                <div class="neural-grid">
+                    <a href="https://mlsysbook.ai" class="neural-card">
+                        <div class="card-header">
+                            <div class="card-icon">📡</div>
+                            <h3 class="card-title">Neural Textbook</h3>
                         </div>
-                        <p class="resource-description">
-                            Open-access book spanning the full ML lifecycle. System-first approach to modern machine learning from data to deployment.
+                        <p class="card-description">
+                            AI-enhanced interactive textbook with adaptive learning paths. Experience machine learning systems through intelligent content delivery.
                         </p>
-                        <span class="resource-link">Read Online →</span>
+                        <span class="card-link">Enter Matrix →</span>
                     </a>
 
-                    <a href="https://github.com/mlsysbook/labs" class="resource-card">
-                        <div class="resource-header">
-                            <div class="resource-icon">⚗️</div>
-                            <h3 class="resource-title">Labs & Exercises</h3>
+                    <a href="https://github.com/mlsysbook/labs" class="neural-card">
+                        <div class="card-header">
+                            <div class="card-icon">🧬</div>
+                            <h3 class="card-title">Quantum Labs</h3>
                         </div>
-                        <p class="resource-description">
-                            Chapter-aligned hands-on exercises and Jupyter notebooks. Build real ML systems from scratch with guided tutorials.
+                        <p class="card-description">
+                            Immersive coding environments with AI-guided tutorials. Build neural networks, optimization algorithms, and distributed systems.
                         </p>
-                        <span class="resource-link">Start Labs →</span>
+                        <span class="card-link">Start Experiment →</span>
                     </a>
 
-                    <a href="https://github.com/mlsysbook/kits" class="resource-card">
-                        <div class="resource-header">
-                            <div class="resource-icon">🤖</div>
-                            <h3 class="resource-title">TinyML Kits</h3>
+                    <a href="https://github.com/mlsysbook/kits" class="neural-card">
+                        <div class="card-header">
+                            <div class="card-icon">🤖</div>
+                            <h3 class="card-title">Edge AI Kits</h3>
                         </div>
-                        <p class="resource-description">
-                            Embedded and edge ML projects using TinyML hardware. Learn deployment on resource-constrained devices.
+                        <p class="card-description">
+                            Neural hardware interfaces for TinyML deployment. Experience AI at the edge with intelligent embedded systems.
                         </p>
-                        <span class="resource-link">Explore Kits →</span>
+                        <span class="card-link">Deploy Intelligence →</span>
                     </a>
 
-                    <a href="https://github.com/mlsysbook/tinytorch" class="resource-card">
-                        <div class="resource-header">
-                            <div class="resource-icon">🔥</div>
-                            <h3 class="resource-title">TinyTorch</h3>
+                    <a href="https://github.com/mlsysbook/tinytorch" class="neural-card">
+                        <div class="card-header">
+                            <div class="card-icon">🔥</div>
+                            <h3 class="card-title">TinyTorch Core</h3>
                         </div>
-                        <p class="resource-description">
-                            Build ML infrastructure from scratch: autograd, runtime, training loops. Understanding systems from first principles.
+                        <p class="card-description">
+                            Build AI infrastructure from quantum principles. Autograd, neural runtime, and distributed training loops.
                         </p>
-                        <span class="resource-link">View Project →</span>
+                        <span class="card-link">Access Core →</span>
                     </a>
 
-                    <a href="https://github.com/mlsysbook/courseware" class="resource-card">
-                        <div class="resource-header">
-                            <div class="resource-icon">🎓</div>
-                            <h3 class="resource-title">Instructor Resources</h3>
+                    <a href="https://github.com/mlsysbook/courseware" class="neural-card">
+                        <div class="card-header">
+                            <div class="card-icon">🎓</div>
+                            <h3 class="card-title">AI Pedagogy</h3>
                         </div>
-                        <p class="resource-description">
-                            Slides, test banks, and certification materials for educators. Everything needed to teach ML systems effectively.
+                        <p class="card-description">
+                            Intelligent teaching resources with adaptive assessment. Neural-powered slides, tests, and certification systems.
                         </p>
-                        <span class="resource-link">Access Materials →</span>
+                        <span class="card-link">Teacher Mode →</span>
                     </a>
 
-                    <a href="https://github.com/orgs/mlsysbook/discussions" class="resource-card">
-                        <div class="resource-header">
-                            <div class="resource-icon">💬</div>
-                            <h3 class="resource-title">Community</h3>
+                    <a href="https://github.com/orgs/mlsysbook/discussions" class="neural-card">
+                        <div class="card-header">
+                            <div class="card-icon">🌐</div>
+                            <h3 class="card-title">Hive Mind</h3>
                         </div>
-                        <p class="resource-description">
-                            Join discussions with students, educators, and researchers. Get help, share insights, and collaborate.
+                        <p class="card-description">
+                            Collective intelligence network. Connect with AI researchers, share discoveries, and evolve together.
                         </p>
-                        <span class="resource-link">Join Community →</span>
+                        <span class="card-link">Join Network →</span>
                     </a>
                 </div>
             </section>
 
-            <!-- Audience -->
+            <!-- AI Audience -->
             <section class="section" id="audience">
-                <div class="audience">
+                <div class="ai-audience">
                     <div class="section-header">
-                        <h2 class="section-title">Who This Is For</h2>
-                        <p class="section-subtitle">Designed for learners and educators across academic and industry settings</p>
+                        <h2 class="section-title">Neural Network</h2>
+                        <p class="section-subtitle">Designed for the next generation of AI practitioners</p>
                     </div>
 
                     <div class="audience-grid">
                         <div class="audience-card">
                             <div class="audience-header">
-                                <div class="audience-icon">🎓</div>
-                                <div class="audience-title">Students</div>
+                                <div class="audience-icon">🧠</div>
+                                <div class="audience-title">AI Students</div>
                             </div>
                             <p class="audience-description">
-                                Learning how ML systems are built, deployed, and optimized in real-world environments
+                                Future AI engineers learning to build, deploy, and optimize intelligent systems at scale
                             </p>
                         </div>
 
                         <div class="audience-card">
                             <div class="audience-header">
-                                <div class="audience-icon">👨‍🏫</div>
-                                <div class="audience-title">Educators</div>
+                                <div class="audience-icon">⚡</div>
+                                <div class="audience-title">Neural Educators</div>
                             </div>
                             <p class="audience-description">
-                                Teaching modern ML from a systems perspective with comprehensive courseware and resources
+                                Teaching next-gen AI systems with adaptive courseware and intelligent assessment tools
                             </p>
                         </div>
 
                         <div class="audience-card">
                             <div class="audience-header">
-                                <div class="audience-icon">⚙️</div>
-                                <div class="audience-title">Engineers</div>
+                                <div class="audience-icon">🚀</div>
+                                <div class="audience-title">AI Engineers</div>
                             </div>
                             <p class="audience-description">
-                                Building production ML infrastructure and deploying systems at scale in industry settings
+                                Building production AI infrastructure and deploying intelligent systems in the real world
                             </p>
                         </div>
                     </div>
@@ -752,22 +966,64 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-links">
-                    <a href="https://mlsysbook.ai" class="footer-link">📚 Book</a>
-                    <a href="https://github.com/mlsysbook/labs" class="footer-link">⚗️ Labs</a>
-                    <a href="https://github.com/mlsysbook/kits" class="footer-link">🤖 Kits</a>
-                    <a href="https://github.com/mlsysbook/tinytorch" class="footer-link">🔥 TinyTorch</a>
-                    <a href="https://github.com/orgs/mlsysbook/discussions" class="footer-link">💬 Community</a>
-                    <a href="mailto:contact@mlsysbook.ai" class="footer-link">📧 Contact</a>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2024 Machine Learning Systems. Developed at Harvard University by Vijay Janapa Reddi.</p>
-                    <p>Open-access educational initiative. All materials freely available.</p>
-                </div>
+            <div class="footer-links">
+                <a href="https://mlsysbook.ai" class="footer-link">📡 Neural Book</a>
+                <a href="https://github.com/mlsysbook/labs" class="footer-link">🧬 Quantum Labs</a>
+                <a href="https://github.com/mlsysbook/kits" class="footer-link">🤖 Edge Kits</a>
+                <a href="https://github.com/mlsysbook/tinytorch" class="footer-link">🔥 TinyTorch</a>
+                <a href="https://github.com/orgs/mlsysbook/discussions" class="footer-link">🌐 Hive Mind</a>
+                <a href="mailto:contact@mlsysbook.ai" class="footer-link">📡 Neural Link</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Neural Learning Systems. AI-Enhanced Education @ Harvard University.</p>
+                <p>Open-source intelligence. Distributed learning. Collective evolution.</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Generate floating particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            return particle;
+        }
+
+        // Initialize particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            particlesContainer.appendChild(createParticle());
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add interaction effects
+        document.querySelectorAll('.neural-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', x + 'px');
+                card.style.setProperty('--mouse-y', y + 'px');
+            });
+        });
+    </script>
 </body>
 </html>
 
