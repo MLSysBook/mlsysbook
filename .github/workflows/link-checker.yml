@@ -26,7 +26,13 @@ jobs:
       run: |
         pip3 install linkchecker
         
-    - name: Check links
+    - name: Check internal links (required)
       run: |
-        echo "🔍 Running link check..."
-        python3 scripts/check-links.py --internal-only --verbose 
+        echo "🔍 Checking internal links (build-blocking)..."
+        python3 scripts/check-links.py --internal-only --verbose
+        
+    - name: Check external links (informational)
+      run: |
+        echo "🌐 Checking external links (informational only)..."
+        python3 scripts/check-links.py --verbose || echo "⚠️ Some external links may be broken, but that's okay!"
+      continue-on-error: true 

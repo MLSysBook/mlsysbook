@@ -100,28 +100,21 @@ def check_links(internal_only=False, verbose=False):
     
     if not html_files:
         print("❌ No HTML files found to check")
-        return False
+        return False, False
     
-    success = True
+    internal_success = True
+    external_success = True
     
+    # Check internal links first
     for url in html_files:
-        print(f"\n🔗 Checking {url}...")
+        print(f"\n🔗 Checking internal links for {url}...")
         
-        # Build linkchecker command
-        cmd_parts = ["linkchecker"]
-        
-        if not internal_only:
-            cmd_parts.extend([
-                "--check-extern",             # Check external links
-                "--timeout=10",               # 10 second timeout for external links
-                "--threads=5"                 # Limit concurrent requests
-            ])
-        
-        cmd_parts.extend([
-            "--no-warnings",                 # Suppress warnings for cleaner output
-            "--output=text",                 # Plain text output
+        cmd_parts = [
+            "linkchecker",
+            "--no-warnings",
+            "--output=text",
             url
-        ])
+        ]
         
         if verbose:
             print(f"Running: {' '.join(cmd_parts)}")
@@ -131,28 +124,67 @@ def check_links(internal_only=False, verbose=False):
                 cmd_parts,
                 capture_output=True,
                 text=True,
-                timeout=120  # 2 minute timeout
+                timeout=120
             )
             
             if result.returncode == 0:
-                print(f"✅ {url} - All links OK")
+                print(f"✅ {url} - Internal links OK")
             else:
-                print(f"❌ {url} - Found broken links")
-                # Always show output when there are broken links
+                print(f"❌ {url} - Found broken internal links")
                 if result.stdout.strip():
                     print(result.stdout)
                 if result.stderr.strip():
                     print("STDERR:", result.stderr)
-                success = False
+                internal_success = False
                 
         except subprocess.TimeoutExpired:
-            print(f"⏰ {url} - Link check timed out")
-            success = False
+            print(f"⏰ {url} - Internal link check timed out")
+            internal_success = False
         except Exception as e:
-            print(f"💥 {url} - Error: {e}")
-            success = False
+            print(f"💥 {url} - Internal link check error: {e}")
+            internal_success = False
     
-    return success
+    # Check external links separately (non-blocking)
+    if not internal_only:
+        print(f"\n🌐 Checking external links (non-blocking)...")
+        for url in html_files:
+            cmd_parts = [
+                "linkchecker",
+                "--check-extern",
+                "--timeout=10",
+                "--threads=3",
+                "--no-warnings",
+                "--output=text",
+                url
+            ]
+            
+            if verbose:
+                print(f"Running: {' '.join(cmd_parts)}")
+            
+            try:
+                result = subprocess.run(
+                    cmd_parts,
+                    capture_output=True,
+                    text=True,
+                    timeout=60  # Shorter timeout for external
+                )
+                
+                if result.returncode == 0:
+                    print(f"✅ {url} - External links OK")
+                else:
+                    print(f"⚠️  {url} - Some external links may be broken (non-critical)")
+                    if verbose and result.stdout.strip():
+                        print(result.stdout)
+                    external_success = False
+                    
+            except subprocess.TimeoutExpired:
+                print(f"⏰ {url} - External link check timed out (non-critical)")
+                external_success = False
+            except Exception as e:
+                print(f"⚠️  {url} - External link check error (non-critical): {e}")
+                external_success = False
+    
+    return internal_success, external_success
 
 def check_common_issues():
     """Check for common link problems."""
@@ -214,16 +246,21 @@ def main():
             common_ok = check_common_issues()
             
             # Check links
-            links_ok = check_links(args.internal_only, args.verbose)
+            internal_ok, external_ok = check_links(args.internal_only, args.verbose)
             
             # Final result
-            if common_ok and links_ok:
-                print("\n🎉 All link checks passed!")
-                print("Your website is ready for deployment.")
+            if common_ok and internal_ok:
+                if not external_ok and not args.internal_only:
+                    print("\n⚠️  Some external links may be broken, but that's okay!")
+                    print("Internal links are all working - safe to deploy.")
+                else:
+                    print("\n🎉 All link checks passed!")
+                    print("Your website is ready for deployment.")
                 sys.exit(0)
             else:
-                print("\n❌ Link check failed!")
-                print("Please fix the issues above before deploying.")
+                print("\n❌ Critical internal link issues found!")
+                print("Please fix internal links and common issues before deploying.")
+                print("(External link issues are non-critical and won't block deployment)")
                 sys.exit(1)
                 
         finally:
