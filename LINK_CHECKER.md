@@ -50,10 +50,11 @@ You can see the results in the GitHub Actions tab of your repository.
 - Anchor links within pages
 - Images and other resources
 
-#### External Links ⚠️
+#### External Links ⚠️ (Non-blocking)
 - Links to external websites
-- Social media links (with exceptions for rate-limited sites)
+- Social media links (with exceptions for rate-limited sites)  
 - External resources and APIs
+- **Note: External link failures are warnings only and won't block commits**
 
 #### Common Issues 🔍
 - Double protocols (`hhttps://` instead of `https://`)
@@ -69,11 +70,18 @@ You can see the results in the GitHub Actions tab of your repository.
 Your website is ready for deployment.
 ```
 
-### ❌ Failure Examples
+### ⚠️ Success with External Link Warnings
 ```
+⚠️ Some external links may be broken, but that's okay!
+Internal links are all working - safe to deploy.
+```
+
+### ❌ Failure Examples (Blocks Commits)
+```
+❌ Critical internal link issues found!
 ❌ index.html: Found broken internal links
 ❌ index.html: Found doubled protocol (hhttps/hhttp)
-⚠️ Some external links may be broken (non-critical)
+(External link issues are non-critical and won't block deployment)
 ```
 
 ## 🛠 Advanced Usage
@@ -142,10 +150,10 @@ If the GitHub Action fails:
 
 ### Before Committing
 ```bash
-# Quick check before commit
+# Quick check before commit (internal links only, blocks commits)
 npm run check-links-fast
 
-# If adding many external links
+# Full check including external links (external issues won't block)
 npm run check-links
 ```
 
