@@ -33,16 +33,23 @@ function checkPrerequisites() {
     process.exit(1);
   }
 
+  // Check for broken-link-checker
   try {
-    execSync('npm list -g broken-link-checker', { stdio: 'ignore' });
+    execSync('which blc', { stdio: 'ignore' });
   } catch (error) {
-    log('📦 Installing broken-link-checker globally...', 'yellow');
+    // Try to find it in npm global location
     try {
-      execSync('npm install -g broken-link-checker', { stdio: 'inherit' });
-      log('✅ broken-link-checker installed successfully!', 'green');
-    } catch (installError) {
-      log('❌ Failed to install broken-link-checker. Please run: npm install -g broken-link-checker', 'red');
-      process.exit(1);
+      execSync('npm list -g broken-link-checker', { stdio: 'ignore' });
+    } catch (npmError) {
+      log('📦 Installing broken-link-checker globally...', 'yellow');
+      try {
+        execSync('npm install -g broken-link-checker', { stdio: 'inherit' });
+        log('✅ broken-link-checker installed successfully!', 'green');
+      } catch (installError) {
+        log('❌ Failed to install broken-link-checker. Please run: npm install -g broken-link-checker', 'red');
+        log('  Or ensure your npm global bin directory is in your PATH', 'yellow');
+        process.exit(1);
+      }
     }
   }
 }
@@ -51,18 +58,32 @@ function startServer() {
   return new Promise((resolve, reject) => {
     log(`🚀 Starting local server on port ${BASE_PORT}...`, 'blue');
     
-    const server = spawn('python3', ['-m', 'http.server', BASE_PORT.toString()], {
-      stdio: verbose ? 'inherit' : 'ignore'
+    // Check if port is already in use
+    const testConnection = spawn('curl', ['-s', `http://localhost:${BASE_PORT}`], {
+      stdio: 'ignore'
     });
+    
+    testConnection.on('close', (code) => {
+      if (code === 0) {
+        log(`✅ Server already running on port ${BASE_PORT}`, 'green');
+        resolve({ kill: () => {} }); // Return dummy server object
+        return;
+      }
+      
+      // Start new server
+      const server = spawn('python3', ['-m', 'http.server', BASE_PORT.toString()], {
+        stdio: verbose ? 'inherit' : 'ignore'
+      });
 
-    // Give server time to start
-    setTimeout(() => {
-      resolve(server);
-    }, 3000);
+      // Give server time to start
+      setTimeout(() => {
+        resolve(server);
+      }, 2000); // Reduced from 3000ms for faster pre-commit
 
-    server.on('error', (error) => {
-      log(`❌ Failed to start server: ${error.message}`, 'red');
-      reject(error);
+      server.on('error', (error) => {
+        log(`❌ Failed to start server: ${error.message}`, 'red');
+        reject(error);
+      });
     });
   });
 }

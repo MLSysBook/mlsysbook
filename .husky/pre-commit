@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔗 Checking links in modified HTML files..."
+
+# Check if any HTML files are being committed
+if git diff --cached --name-only | grep -q '\.html$'; then
+    echo "📝 HTML files detected, running link check..."
+    npm run check-links-fast
+else
+    echo "✅ No HTML files modified, skipping link check"
+fi
