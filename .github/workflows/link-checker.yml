@@ -17,74 +17,16 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+    - name: Setup Python
+      uses: actions/setup-python@v4
       with:
-        node-version: '18'
+        python-version: '3.11'
         
     - name: Install dependencies
       run: |
-        npm install -g broken-link-checker
+        pip3 install linkchecker
         
-    - name: Start local server
+    - name: Check links
       run: |
-        # Start a simple HTTP server in the background
-        python3 -m http.server 8080 &
-        sleep 5
-        
-    - name: Check links in HTML files
-      run: |
-        echo "🔍 Checking links in all HTML files..."
-        
-        # Check main index.html
-        echo "Checking main index.html..."
-        blc http://localhost:8080/index.html --recursive --exclude-external --filter-level 3 || exit_code=$?
-        
-        # Check subdirectory HTML files
-        for dir in book tinytorch labs kits; do
-          if [ -d "$dir" ] && [ -f "$dir/index.html" ]; then
-            echo "Checking $dir/index.html..."
-            blc "http://localhost:8080/$dir/index.html" --recursive --exclude-external --filter-level 3 || exit_code=$?
-          fi
-        done
-        
-        # Check external links (more lenient)
-        echo "🌐 Checking external links..."
-        blc http://localhost:8080/index.html --external-only --filter-level 2 --requests 1 --exclude "linkedin.com" --exclude "twitter.com" --exclude "facebook.com" || external_exit_code=$?
-        
-        # Report results
-        if [ ${exit_code:-0} -ne 0 ]; then
-          echo "❌ Internal link check failed"
-          exit 1
-        fi
-        
-        if [ ${external_exit_code:-0} -ne 0 ]; then
-          echo "⚠️ Some external links may be broken, but not failing the build"
-          echo "Please review the external link warnings above"
-        fi
-        
-        echo "✅ Link check completed successfully!"
-        
-    - name: Check for common issues
-      run: |
-        echo "🔎 Checking for common link issues..."
-        
-        # Check for double http/https
-        if grep -r "hhttps\|hhttp" *.html */index.html 2>/dev/null; then
-          echo "❌ Found doubled protocol in URLs (hhttps/hhttp)"
-          exit 1
-        fi
-        
-        # Check for localhost links in production files
-        if grep -r "localhost\|127.0.0.1" *.html */index.html 2>/dev/null; then
-          echo "❌ Found localhost links in HTML files"
-          exit 1
-        fi
-        
-        # Check for missing closing tags in href attributes
-        if grep -r 'href="[^"]*$' *.html */index.html 2>/dev/null; then
-          echo "❌ Found unclosed href attributes"
-          exit 1
-        fi
-        
-        echo "✅ No common link issues found!" 
+        echo "🔍 Running link check..."
+        python3 scripts/check-links.py --internal-only --verbose 
