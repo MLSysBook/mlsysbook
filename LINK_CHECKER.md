@@ -1,6 +1,6 @@
 # Link Checker Documentation
 
-This project includes an automated link checking system to ensure all links are working before deployment.
+This project uses a simple, reliable Python-based link checking system to ensure all links work before deployment.
 
 ## 🚀 Quick Start
 
@@ -13,16 +13,18 @@ npm run check-links-fast
 # Full check (internal + external links)
 npm run check-links
 
-# Verbose output for debugging
-node scripts/check-links.js --verbose
+# Direct Python usage with options
+python3 scripts/check-links.py --internal-only --verbose
 ```
 
 ### First Time Setup
 
-1. Install Node.js (if not already installed)
-2. Install the link checker globally:
+1. Ensure Python 3 is installed
+2. Install the link checker:
    ```bash
-   npm install -g broken-link-checker
+   pip3 install linkchecker
+   # OR
+   pip3 install -r requirements.txt
    ```
 3. Run your first check:
    ```bash
@@ -80,13 +82,13 @@ Your website is ready for deployment.
 
 ```bash
 # Internal links only (faster)
-node scripts/check-links.js --internal-only
+python3 scripts/check-links.py --internal-only
 
 # Verbose output for debugging
-node scripts/check-links.js --verbose
+python3 scripts/check-links.py --verbose
 
 # Both options
-node scripts/check-links.js --internal-only --verbose
+python3 scripts/check-links.py --internal-only --verbose
 ```
 
 ### Manual Server Testing
@@ -108,18 +110,24 @@ curl -I http://localhost:8080/index.html
    - On macOS: `brew install python3`
    - On Ubuntu: `sudo apt-get install python3`
 
-2. **"broken-link-checker not found"**
-   - Install globally: `npm install -g broken-link-checker`
-   - Or let the script auto-install it
+2. **"linkchecker not found"**
+   - Install: `pip3 install linkchecker`
+   - Or: `pip3 install -r requirements.txt`
+   - Ensure pip3 is in your PATH
 
 3. **Port 8080 already in use**
    - Kill existing processes: `lsof -ti:8080 | xargs kill`
-   - Or edit `BASE_PORT` in `scripts/check-links.js`
+   - The script will detect and reuse existing servers
 
 4. **External links timing out**
    - This is often normal for social media sites
    - The build won't fail on external link issues
    - Use `--internal-only` for faster testing
+
+5. **"404 Not Found" for GitHub repositories**
+   - Some repository links may be outdated or private
+   - Check if the repositories exist or have been moved
+   - External link issues don't fail the CI build
 
 ### GitHub Actions Failures
 
@@ -175,12 +183,13 @@ schedule:
 ## 📖 How It Works
 
 1. **Local Server**: Starts Python HTTP server on port 8080
-2. **Internal Check**: Crawls all HTML files for broken internal links
-3. **External Check**: Tests external URLs (with rate limiting)
-4. **Common Issues**: Scans for typical problems like typos
-5. **Cleanup**: Shuts down server and reports results
+2. **LinkChecker**: Uses the mature `linkchecker` Python package
+3. **Internal Check**: Crawls all HTML files for broken internal links
+4. **External Check**: Tests external URLs (with timeout and threading limits)
+5. **Common Issues**: Scans for typical problems like doubled protocols
+6. **Cleanup**: Shuts down server and reports results
 
-The system is designed to catch issues early while being forgiving of temporary external link problems.
+The system uses the established `linkchecker` package (10+ years mature) instead of custom solutions, making it more reliable and easier to maintain.
 
 ## 🆘 Getting Help
 
