@@ -1,0 +1,26 @@
+{
+  "name": "mlsysbook-website",
+  "version": "1.0.0",
+  "description": "Machine Learning Systems Educational Resources Website",
+  "scripts": {
+    "check-links": "node scripts/check-links.js",
+    "check-links-fast": "node scripts/check-links.js --internal-only",
+    "serve": "python3 -m http.server 8080",
+    "test": "npm run check-links-fast"
+  },
+  "devDependencies": {
+    "broken-link-checker": "^0.7.8",
+    "chalk": "^4.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mlsysbook/mlsysbook.github.io"
+  },
+  "keywords": [
+    "machine-learning",
+    "education",
+    "tinyml",
+    "embedded-ml"
+  ],
+  "license": "MIT"
+} 
